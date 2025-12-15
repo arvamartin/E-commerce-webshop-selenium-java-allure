@@ -1,0 +1,5 @@
+"username","password","url","errorMessage"
+"invalid","invalid","https://www.saucedemo.com/","Epic sadface: Username and password do not match any user in this service"
+"","","https://www.saucedemo.com/","Epic sadface: Username is required"
+"locked_out_user","secret_sauce","https://www.saucedemo.com/","Epic sadface: Sorry, this user has been locked out."
+" "," ","https://www.saucedemo.com/","Epic sadface: Username and password do not match any user in this service"
