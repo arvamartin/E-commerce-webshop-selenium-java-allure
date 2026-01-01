@@ -1,14 +1,19 @@
 package pages.components;
 
 import framework.core.BasePage;
+import framework.core.Element;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 public class Sidebar extends BasePage {
 
     @FindBy(className = "bm-menu")
     private WebElement sidebarPanel;
+    @FindBy(className = "bm-item-list")
+    private List<WebElement> sidebarElements;
     @FindBy(id = "react-burger-menu-btn")
     private WebElement menuBtn;
     @FindBy(id = "inventory_sidebar_link")
@@ -20,21 +25,24 @@ public class Sidebar extends BasePage {
     @FindBy(id = "react-burger-cross-btn")
     private WebElement closeBtn;
 
+    public List<WebElement> getSidebarElements() {
+        return sidebarElements;
+    }
 
     public WebElement getSidebarPanel() {
         return sidebarPanel;
     }
 
     public WebElement getMenuBtn() {
-        return menuBtn;
+        return wait.until(ExpectedConditions.elementToBeClickable(menuBtn));
     }
 
     public WebElement getAllItemsBtn() {
-        return allItemsBtn;
+        return wait.until(ExpectedConditions.elementToBeClickable(allItemsBtn));
     }
 
     public WebElement getAboutBtn() {
-        return aboutBtn;
+        return wait.until(ExpectedConditions.elementToBeClickable(aboutBtn));
     }
 
     public WebElement getLogoutBtn() {
@@ -42,6 +50,8 @@ public class Sidebar extends BasePage {
     }
 
     public WebElement getCloseBtn() {
+        wait.until(ExpectedConditions.visibilityOf(closeBtn));
+        wait.until(ExpectedConditions.elementToBeClickable(closeBtn));
         return closeBtn;
     }
 }

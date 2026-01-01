@@ -12,8 +12,6 @@ import static framework.core.Constants.LOGIN_URL;
 @Severity(SeverityLevel.CRITICAL)
 @Owner("QA")
 @Tag("UI")
-
-
 public class LoginPageUiTest {
 
     private LoginAction loginAction;

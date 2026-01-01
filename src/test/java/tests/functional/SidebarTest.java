@@ -16,12 +16,11 @@ import static framework.core.Constants.*;
 
 public class SidebarTest {
     private SidebarAction sidebarAction;
-    private LoginAction loginAction;
 
     @BeforeEach
     public void setUp() {
         sidebarAction = new SidebarAction();
-        loginAction = new LoginAction();
+        LoginAction loginAction = new LoginAction();
 
         loginAction.login();
     }
@@ -29,6 +28,18 @@ public class SidebarTest {
     @AfterEach
     public void tearDown() {
         Browser.quitDriver();
+    }
+
+    @Test
+    @Story("Sidebar navigation - display and close")
+    @DisplayName("Sidebar menu displays items and can be closed")
+    @Description("Verify that the sidebar menu displays all items and can be closed successfully")
+    public void successfulDisplaysSidebarItemsAndCloseThePanel() {
+        sidebarAction
+                .openSidebar()
+                .validatePresenceOfSidebarItems()
+                .clickOnCloseCross()
+                .sidebarMenuIsNotDisplayed();
     }
 
     @Test
@@ -40,11 +51,29 @@ public class SidebarTest {
                 .openSidebar()
                 .logout()
                 .validateCurrentPage(LOGIN_URL.getValue());
-
     }
 
-//    public void successfulAboutSiteFromSidebar(){
-//        sidebarAction
-//                .openSidebar()
-//    }
+    @Test
+    @Story("Sidebar navigation - about")
+    @DisplayName("Successful navigated to about site")
+    @Description("Verify that a logged in user is able to reach about site using the sidebar menu")
+    public void successfulAboutSiteFromSidebar(){
+        sidebarAction
+                .openSidebar()
+                .clickOnAboutBtn()
+                .validateCurrentPage(ABOUT_PAGE_URL.getValue());
+    }
+
+    @Test
+    @Story("Sidebar navigation - all items")
+    @DisplayName("Successful navigated to inventory page")
+    @Description("Verify that a logged in user is able to reach inventory page using the sidebar menu")
+    public void successfulAllItemsFromSidebar(){
+        sidebarAction
+                .openSidebar()
+                .navigateTo("https://www.saucedemo.com/inventory-item.html?id=1")
+                .openSidebar()
+                .clickOnAllItemsBtn()
+                .validateCurrentPage(HOME_PAGE_URL.getValue());
+    }
 }

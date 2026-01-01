@@ -4,14 +4,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import static framework.core.Constants.UI_PROPERTIES_PATH;
 
 public class PropertyReader {
 
     private static Properties properties = new Properties();
 
-    static {
-        try (InputStream fis = PropertyReader.class.getClassLoader().getResourceAsStream(UI_PROPERTIES_PATH.getValue())) {
+    public static void loadProperty(String path) {
+        try (InputStream fis = PropertyReader.class.getClassLoader().getResourceAsStream(path)) {
             if (fis != null) {
                 properties.load(fis);
             } else {
@@ -22,7 +21,8 @@ public class PropertyReader {
         }
     }
 
-    public static String getValue(String section, String key) {
+    public static String getValue(String fileName, String section, String key) {
+        loadProperty(fileName + ".properties");
         String prefixedKey = section + "." + key;
 
         String systemProperty = System.getProperty(prefixedKey);
